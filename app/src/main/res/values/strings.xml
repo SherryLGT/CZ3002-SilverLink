@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SilverLink</string>
+    <string name="app_logo">Link</string>
+    <string name="error_msg">Error message</string>
+
+    <!-- LOGIN / SIGN UP -->
+    <string name="prompt_name">Name</string>
+    <string name="prompt_phone_no">Phone No.</string>
+    <string name="prompt_pwd">Password</string>
+    <string name="prompt_pwd2">Confirm Password</string>
+    <string name="btn_login">Login</string>
+    <string name="tv_signup">Sign Up</string>
+    <string name="tv_forget_pwd">Forget Password</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="invalid_login">Incorrect phone no. or password.</string>
+
+</resources>

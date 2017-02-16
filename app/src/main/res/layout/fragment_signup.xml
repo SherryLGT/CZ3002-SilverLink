@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created by Sherry Lau Geok Teng on 17/2/2017 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lcnch.cz3002.ntu.silverlink.SignupFragment">
+
+    <TextView
+        android:id="@+id/tv_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/title_font_size"
+        android:text="@string/tv_signup"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_sign_up"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size"
+        android:text="@string/prompt_name"
+        android:labelFor="@+id/et_name"/>
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/border_text_box"
+        android:inputType="textAutoComplete"
+        android:textSize="@dimen/font_size"
+        android:maxLines="1"/><requestFocus/>
+
+    <TextView
+        android:id="@+id/tv_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_name"
+        android:layout_marginTop="@dimen/text_box_break"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size"
+        android:text="@string/prompt_pwd"
+        android:labelFor="@+id/et_pwd"/>
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pwd"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/border_text_box"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_size"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tv_pwd2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_pwd"
+        android:layout_marginTop="@dimen/text_box_break"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size"
+        android:text="@string/prompt_pwd2"
+        android:labelFor="@+id/et_pwd2"/>
+
+    <EditText
+        android:id="@+id/et_pwd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pwd2"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/border_text_box"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_size"
+        android:maxLines="1"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/round_button"
+        android:textAllCaps="true"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sml_font_size"
+        android:text="@string/btn_cancel"/>
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/round_button"
+        android:textAllCaps="true"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sml_font_size"
+        android:text="@string/btn_signup"/>
+
+</RelativeLayout>

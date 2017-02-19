@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 
@@ -17,10 +18,12 @@ import android.widget.EditText;
  * @version 1.0
  * @since 17/02/2017
  */
+
 public class SignupFragment extends Fragment {
 
     private View rootView;
     private EditText et_name, et_pwd, et_pwd2;
+    private CheckBox cb_role;
     private Button btn_cancel, btn_signup;
 
     /**
@@ -40,6 +43,7 @@ public class SignupFragment extends Fragment {
         et_name = (EditText) rootView.findViewById(R.id.et_name);
         et_pwd = (EditText) rootView.findViewById(R.id.et_pwd);
         et_pwd2 = (EditText) rootView.findViewById(R.id.et_pwd2);
+        cb_role = (CheckBox) rootView.findViewById(R.id.cb_role);
         btn_cancel = (Button) rootView.findViewById(R.id.btn_cancel);
         btn_signup = (Button) rootView.findViewById(R.id.btn_signup);
 

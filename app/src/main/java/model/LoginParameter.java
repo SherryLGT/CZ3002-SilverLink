@@ -8,12 +8,13 @@ package model;
  * @since 18/02/2017
  */
 
-public class LoginParameters {
-    String grantType;
-    String phoneNumber;
-    String password;
+public class LoginParameter {
 
-    public LoginParameters(String phoneNumer, String password) {
+    private String grantType;
+    private String phoneNumber;
+    private String password;
+
+    public LoginParameter(String phoneNumer, String password) {
         this.grantType = "grant_type=password";
         this.phoneNumber = phoneNumer;
         this.password = password;

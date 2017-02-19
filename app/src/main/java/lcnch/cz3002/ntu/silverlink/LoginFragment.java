@@ -2,6 +2,7 @@ package lcnch.cz3002.ntu.silverlink;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,10 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import controller.Utility;
 import model.ApplicationUser;
-import model.LoginParameters;
+import model.LoginParameter;
 
 /**
  *
@@ -28,6 +31,7 @@ import model.LoginParameters;
  * @version 1.0
  * @since 17/02/2017
  */
+
 public class LoginFragment extends Fragment {
 
     private View rootView;
@@ -36,10 +40,9 @@ public class LoginFragment extends Fragment {
     private TextView tv_error_msg, tv_signup, tv_forget_pwd;
 
     private ProgressDialog dialog;
-    private Gson gson;
-    private LoginParameters parameters;
+    private LoginParameter parameters;
     private String response;
-    private ApplicationUser user;
+    private boolean valid;
 
     /**
      * Default constructor for LoginFragment
@@ -61,7 +64,7 @@ public class LoginFragment extends Fragment {
         tv_signup = (TextView) rootView.findViewById(R.id.tv_signup);
         tv_forget_pwd = (TextView) rootView.findViewById(R.id.tv_forget_pwd);
 
-        tv_error_msg.setText(this.getString(R.string.invalid_login));
+        tv_error_msg.setText(this.getResources().getString(R.string.invalid_login));
 
         et_pwd.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -83,7 +86,7 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_phone_no.getText().length() == 8 && et_phone_no.getText().length() > 0) {
+                if(et_phone_no.getText().length() == 8 && !et_phone_no.getText().toString().isEmpty()) {
                     tv_error_msg.setVisibility(View.GONE);
                     et_phone_no.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
                     et_pwd.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
@@ -92,7 +95,7 @@ public class LoginFragment extends Fragment {
                     dialog.setMessage("Loading...");
                     dialog.setCancelable(false);
 
-                    parameters = new LoginParameters(et_phone_no.getText().toString(), et_pwd.getText().toString());
+                    parameters = new LoginParameter(et_phone_no.getText().toString(), et_pwd.getText().toString());
                     new getToken().execute();
                 }
                 if(et_phone_no.getText().length() <  8) {
@@ -127,17 +130,29 @@ public class LoginFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             dialog.show();
-            gson = new Gson();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
+
+            JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
+            if(obj.get("access_token") != null) {
+                Utility.accessToken = obj.get("access_token").getAsString();
+
+                Intent intent = new Intent(getContext(), HomeActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else {
+                tv_error_msg.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.postRequest("Token", parameters.getGrantType() + "&username=" + parameters.getPhoneNumber() + "&password=" + parameters.getPassword());
+
             return null;
         }
     }

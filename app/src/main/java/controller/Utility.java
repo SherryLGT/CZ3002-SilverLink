@@ -1,22 +1,14 @@
 package controller;
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -30,12 +22,15 @@ public class Utility {
     // Web service url
     final static String API_URL = "http://lcnch-silverlink.azurewebsites.net/";
 
+    public static String accessToken = "";
+
     // Get request from api (getURL), returns json result
     public static String getRequest(String getURL) {
         try {
             URL url = new URL(API_URL + getURL.replace(" ","%20"));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
+                urlConnection.setRequestProperty("Authorization ", "Bearer " + accessToken);
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line;
                 StringBuffer response = new StringBuffer();
@@ -62,6 +57,7 @@ public class Utility {
             try {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
                 urlConnection.setChunkedStreamingMode(0);
@@ -72,7 +68,14 @@ public class Utility {
                 dStream.flush();
                 dStream.close();
 
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream inputStream;
+                int status = urlConnection.getResponseCode();
+                if (status != HttpURLConnection.HTTP_OK)
+                    inputStream = urlConnection.getErrorStream();
+                else
+                    inputStream = urlConnection.getInputStream();
+
+                InputStream in = new BufferedInputStream(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
                 String line;
                 StringBuffer response = new StringBuffer();

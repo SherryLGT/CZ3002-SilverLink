@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import controller.Utility;
 import model.ApplicationUser;
+import model.LoginParameters;
 
 /**
  *
@@ -36,6 +37,8 @@ public class LoginFragment extends Fragment {
 
     private ProgressDialog dialog;
     private Gson gson;
+    private LoginParameters parameters;
+    private String response;
     private ApplicationUser user;
 
     /**
@@ -89,7 +92,8 @@ public class LoginFragment extends Fragment {
                     dialog.setMessage("Loading...");
                     dialog.setCancelable(false);
 
-                    new loadData().execute();
+                    parameters = new LoginParameters(et_phone_no.getText().toString(), et_pwd.getText().toString());
+                    new getToken().execute();
                 }
                 if(et_phone_no.getText().length() <  8) {
                     tv_error_msg.setVisibility(View.VISIBLE);
@@ -119,7 +123,7 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
-    private class loadData extends AsyncTask<Void, Void, Void> {
+    private class getToken extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             dialog.show();
@@ -133,6 +137,7 @@ public class LoginFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
+            response = Utility.postRequest("Token", parameters.getGrantType() + "&username=" + parameters.getPhoneNumber() + "&password=" + parameters.getPassword());
             return null;
         }
     }

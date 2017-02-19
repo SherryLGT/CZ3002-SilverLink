@@ -1,14 +1,22 @@
 package controller;
 
+import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,7 +28,7 @@ import java.net.URL;
 
 public class Utility {
     // Web service url
-    final static String API_URL = "http:/silverlink.cczy.io/api/";
+    final static String API_URL = "http://lcnch-silverlink.azurewebsites.net/";
 
     // Get request from api (getURL), returns json result
     public static String getRequest(String getURL) {

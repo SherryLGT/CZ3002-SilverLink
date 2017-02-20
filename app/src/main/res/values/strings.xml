@@ -16,4 +16,10 @@
     <string name="invalid_login">Incorrect phone no. or password.</string>
     <string name="prompt_role">I am a caregiver.</string>
 
+    <!-- HOME -->
+    <string name="nav_friend">Friend</string>
+    <string name="nav_group">Group</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_setting">Setting</string>
+
 </resources>

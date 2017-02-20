@@ -14,35 +14,21 @@ import java.util.ArrayList;
 
 public class ApplicationUser {
 
-    private String id;
-    private String phoneNumber;
     private String fullName;
     private Byte[] profilePicture;
-    private int role; // 1 - SilverUser, 2 - CarerUser
+    private UserRole role;
+    private String deviceId;
+    private String id;
+    private String phoneNumber;
 
     public ApplicationUser() {}
 
-    public ApplicationUser(String id, String phoneNumber, String fullName, Byte[] profilePicture, int role) {
-        this.id = id;
-        this.phoneNumber = phoneNumber;
+    public ApplicationUser(String fullName, Byte[] profilePicture, UserRole role, String deviceId, String id, String phoneNumber) {
         this.fullName = fullName;
         this.profilePicture = profilePicture;
         this.role = role;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+        this.deviceId = deviceId;
         this.id = id;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -62,12 +48,36 @@ public class ApplicationUser {
         this.profilePicture = profilePicture;
     }
 
-    public int getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public class SilverUser extends ApplicationUser {
@@ -130,6 +140,7 @@ public class ApplicationUser {
     }
 
     public class CarerUser extends ApplicationUser {
+
         private SilverUser care;
 
         public CarerUser() {}
@@ -146,4 +157,5 @@ public class ApplicationUser {
             this.care = care;
         }
     }
+
 }

@@ -9,8 +9,8 @@ package model;
  */
 
 public enum UserRole {
-    SILVER(1), // UserRole.SILVER.getValue()
-    CARER(2); // UserRole.CARER.getValue()
+    SILVER(1),
+    CARER(2);
 
     private final int value;
 

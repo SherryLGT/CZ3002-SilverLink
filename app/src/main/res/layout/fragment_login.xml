@@ -38,7 +38,6 @@
         android:hint="@string/prompt_phone_no"
         android:inputType="phone"
         android:maxLength="8"
-        android:textSize="@dimen/font_size"
         android:maxLines="1"/>
 
     <EditText
@@ -52,7 +51,6 @@
         android:background="@drawable/border_text_box"
         android:hint="@string/prompt_pwd"
         android:inputType="textPassword"
-        android:textSize="@dimen/font_size"
         android:maxLines="1"/>
 
     <Button
@@ -65,8 +63,6 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/round_button"
         android:textAllCaps="true"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/font_size"
         android:text="@string/btn_login"/>
 
     <TextView

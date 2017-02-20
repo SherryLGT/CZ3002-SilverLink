@@ -24,7 +24,6 @@
         android:layout_below="@id/tv_sign_up"
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size"
         android:text="@string/prompt_name"
         android:labelFor="@+id/et_name"/>
 
@@ -36,7 +35,6 @@
         android:padding="@dimen/text_box_padding"
         android:background="@drawable/border_text_box"
         android:inputType="textAutoComplete"
-        android:textSize="@dimen/font_size"
         android:maxLines="1"/><requestFocus/>
 
     <TextView
@@ -46,7 +44,6 @@
         android:layout_below="@id/et_name"
         android:layout_marginTop="@dimen/text_box_break"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size"
         android:text="@string/prompt_pwd"
         android:labelFor="@+id/et_pwd"/>
 
@@ -58,7 +55,6 @@
         android:padding="@dimen/text_box_padding"
         android:background="@drawable/border_text_box"
         android:inputType="textPassword"
-        android:textSize="@dimen/font_size"
         android:maxLines="1"/>
 
     <TextView
@@ -68,7 +64,6 @@
         android:layout_below="@id/et_pwd"
         android:layout_marginTop="@dimen/text_box_break"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size"
         android:text="@string/prompt_pwd2"
         android:labelFor="@+id/et_pwd2"/>
 
@@ -80,7 +75,6 @@
         android:padding="@dimen/text_box_padding"
         android:background="@drawable/border_text_box"
         android:inputType="textPassword"
-        android:textSize="@dimen/font_size"
         android:maxLines="1"/>
 
     <CheckBox

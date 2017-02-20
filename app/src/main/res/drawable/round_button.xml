@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Created by Sherry Lau Geok Teng on 17/2/2017 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle" >
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- View background color -->
-    <solid
-        android:color="@color/steel" >
-    </solid>
+    <item
+        android:state_pressed="true">
 
-    <!-- View border color and width -->
-    <!--<stroke-->
-        <!--android:width="1dp"-->
-        <!--android:color="@color/light_blue" >-->
-    <!--</stroke>-->
+        <shape
+            android:shape="rectangle">
 
-    <!-- The radius makes the corners rounded -->
-    <corners
-        android:radius="5dp"   >
-    </corners>
+            <solid android:color="@color/dark_steel" />
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
 
-</shape>
+    <item>
+        <shape
+            android:shape="rectangle">
+
+            <solid android:color="@color/steel" />
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+
+</selector>

@@ -3,12 +3,16 @@ package lcnch.cz3002.ntu.silverlink;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import model.ApplicationUser;
 
 
 /**
@@ -25,6 +29,8 @@ public class SignupFragment extends Fragment {
     private EditText et_name, et_pwd, et_pwd2;
     private CheckBox cb_role;
     private Button btn_cancel, btn_signup;
+
+    private ApplicationUser user;
 
     /**
      * Default constructor for SignupFragment
@@ -46,6 +52,34 @@ public class SignupFragment extends Fragment {
         cb_role = (CheckBox) rootView.findViewById(R.id.cb_role);
         btn_cancel = (Button) rootView.findViewById(R.id.btn_cancel);
         btn_signup = (Button) rootView.findViewById(R.id.btn_signup);
+
+        et_pwd2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch(keyCode) {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            btn_signup.performClick();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!et_pwd.getText().toString().equals(et_pwd2.getText().toString())) {
+                    et_pwd.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
+                    et_pwd2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
+                }
+                user = new ApplicationUser();
+            }
+        });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

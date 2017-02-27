@@ -28,16 +28,16 @@
     <string name="title_add_friend">Add Friend</string>
     <string name="iv_profile_pic">Profile Picture</string>
     <string name="btn_add_friend">Add Friend</string>
-
-    <string name="tv_update_profile">Update Profile</string>
-    <string name="btn_update_profile">Update Profile</string>
-    <string name="btn_update_pw">Update Password</string>
-    <string name="prompt_oldpwd">Old Password</string>
-    <string name="prompt_newpwd">New Password</string>
-
     <string-array name="sort_by">
         <item>Alphabetical (A-Z)</item>
         <item>Recent Messages</item>
     </string-array>
     <string name="tv_not_found">Not Found</string>
+
+    <!-- PROFILE -->
+    <string name="tv_update_profile">Update Profile</string>
+    <string name="btn_update_profile">Update Profile</string>
+    <string name="btn_update_pw">Update Password</string>
+    <string name="prompt_oldpwd">Old Password</string>
+    <string name="prompt_newpwd">New Password</string>
 </resources>

@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.FriendAdapter;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
 import lcnch.cz3002.ntu.silverlink.model.FriendItem;
@@ -39,7 +37,7 @@ public class FriendFragment extends Fragment {
     private Spinner spnSort;
     private ListView lvFriendList;
     private Button btnAddFriend;
-    private Gson gson = GsonHelper.customGson;
+    private Gson gson = Utility.customGson;
 
     private String response;
     public static ArrayList<Friend> friendList;

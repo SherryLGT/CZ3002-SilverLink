@@ -26,7 +26,6 @@ import com.google.gson.Gson;
 import java.util.Random;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
@@ -53,7 +52,7 @@ public class AddFriendFragment extends Fragment {
     private ProgressDialog dialog;
     private String phoneNo, response;
     private ApplicationUser user;
-    private Gson gson = GsonHelper.customGson;
+    private Gson gson = Utility.customGson;
     /**
      * Default constructor for AddFriendFragment
      */

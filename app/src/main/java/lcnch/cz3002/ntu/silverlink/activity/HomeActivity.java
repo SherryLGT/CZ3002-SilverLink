@@ -64,8 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // For testing purpose (remove when not needed)
-        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
+        //startActivity(intent);
     }
 
     @Override

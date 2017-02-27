@@ -24,7 +24,7 @@ import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 public class SplashActivity extends AppCompatActivity {
 
     public static SharedPreferences sharedPreferences;
-    private Gson gson;
+    private Gson gson = Utility.customGson;
     private String response;
     public static ApplicationUser loggedInUser;
 
@@ -52,7 +52,6 @@ public class SplashActivity extends AppCompatActivity {
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            gson = new Gson();
             loggedInUser = new ApplicationUser();
         }
 

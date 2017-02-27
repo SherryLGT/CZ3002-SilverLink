@@ -1,5 +1,6 @@
 package lcnch.cz3002.ntu.silverlink.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,40 +9,34 @@ import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private ProgressDialog dialog;
     private ApplicationUser userProfile;
-    private Gson gson = GsonHelper.customGson;
+    private Gson gson = Utility.customGson;
     ImageView ivProfilePic;
     EditText etName;
     EditText etPwd;
     EditText etPwd2;
     Button btnUpdateProfile;
-
+    private JsonObject jsonObject;
+    Bitmap profileBitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
         etPwd = (EditText) findViewById(R.id.et_pwd);
         etPwd2 = (EditText) findViewById(R.id.et_pwd2);
         btnUpdateProfile = (Button) findViewById(R.id.btn_update_profile);
-
+        ivProfilePic.setImageResource(R.drawable.default_guy);
+        dialog = Utility.SetupLoadingDialog(this, dialog);
 
         new GetProfile().execute();
 
@@ -72,7 +68,17 @@ public class ProfileActivity extends AppCompatActivity {
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new SetProfile().execute();
+
+                if(!etPwd.getText().toString().equals("") && !etPwd2.getText().toString().equals("")){
+                    jsonObject = new JsonObject();
+                    jsonObject.addProperty("oldPassword", etPwd.getText().toString());
+                    jsonObject.addProperty("newPassword", etPwd2.getText().toString());
+                    new UpdatePassword().execute();
+                }
+
+                new GetProfile().execute();
             }
         });
     }
@@ -86,10 +92,14 @@ public class ProfileActivity extends AppCompatActivity {
             Uri imgUri = data.getData();
 
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+                profileBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
                 // Log.d(TAG, String.valueOf(bitmap));
-
-                ivProfilePic.setImageBitmap(bitmap);
+                int size = profileBitmap.getWidth();
+                if(size>profileBitmap.getHeight())
+                    size = profileBitmap.getHeight();
+                profileBitmap = Bitmap.createBitmap(profileBitmap, (profileBitmap.getWidth()-size)/2, (profileBitmap.getHeight()-size)/2, ((profileBitmap.getWidth()-size)/2)+size, ((profileBitmap.getHeight()-size)/2)+size);
+                profileBitmap = Bitmap.createScaledBitmap(profileBitmap, 128, 128, false);
+                ivProfilePic.setImageBitmap(profileBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
     private class GetProfile extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-
+            dialog.show();
 
         }
 
@@ -111,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                 ivProfilePic.setImageBitmap(bitmap);
             }
             etName.setText(userProfile.getFullName());
-
+            dialog.dismiss();
         }
 
         @Override
@@ -126,31 +136,46 @@ public class ProfileActivity extends AppCompatActivity {
     private class SetProfile extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            ivProfilePic.setDrawingCacheEnabled(true);
-            ivProfilePic.buildDrawingCache();
-            Bitmap bm = ivProfilePic.getDrawingCache();
+            dialog.show();
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-            byte[] byteArray = stream.toByteArray();
-            userProfile.setProfilePicture(byteArray);
-
+            if(profileBitmap != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                profileBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+                byte[] byteArray = stream.toByteArray();
+                userProfile.setProfilePicture(byteArray);
+            }
             userProfile.setFullName(etName.getText().toString());
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-//            if (userProfile.getProfilePicture() != null) {
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(userProfile.getProfilePicture(), 0, userProfile.getProfilePicture().length);
-//                ivProfilePic.setImageBitmap(bitmap);
-//            }
-            etName.setText(userProfile.getFullName());
-
+            dialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Profile Updated!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             String response = Utility.postRequest("api/User", gson.toJson(userProfile));
+            return null;
+        }
+    }
+
+
+    private class UpdatePassword extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            dialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            dialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Password Updated!", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String response = Utility.postRequest("api/Account/ChangePassword", jsonObject.toString());
             return null;
         }
     }

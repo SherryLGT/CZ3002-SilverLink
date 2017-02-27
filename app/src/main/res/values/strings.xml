@@ -28,4 +28,11 @@
     <string name="title_add_friend">Add Friend</string>
     <string name="iv_profile_pic">Profile Picture</string>
     <string name="btn_add_friend">Add Friend</string>
+
+    <!-- PROFILE -->
+    <string name="tv_update_profile">Update Profile</string>
+    <string name="btn_update_profile">Update Profile</string>
+    <string name="btn_update_pw">Update Password</string>
+    <string name="prompt_oldpwd">Old Password</string>
+    <string name="prompt_newpwd">New Password</string>
 </resources>

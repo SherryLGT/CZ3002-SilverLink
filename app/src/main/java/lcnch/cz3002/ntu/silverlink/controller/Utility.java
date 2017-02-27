@@ -61,15 +61,14 @@ public class Utility {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
-                urlConnection.setDoInput(true);
+
                 urlConnection.setDoOutput(true);
-                urlConnection.setChunkedStreamingMode(0);
+                urlConnection.setFixedLengthStreamingMode(para.getBytes().length);
 
                 OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-                DataOutputStream dStream = new DataOutputStream(out);
-                dStream.writeBytes(para);
-                dStream.flush();
-                dStream.close();
+                out.write(para.getBytes());
+                out.flush();
+                out.close();
 
                 InputStream inputStream;
                 int status = urlConnection.getResponseCode();

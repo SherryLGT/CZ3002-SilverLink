@@ -51,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         ibProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
             }
         });
 

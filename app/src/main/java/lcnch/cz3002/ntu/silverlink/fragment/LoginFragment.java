@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -43,7 +42,6 @@ public class LoginFragment extends Fragment {
     private EditText etPhoneNo, etPwd;
     private Button btnLogin;
     private TextView tvErrorMsg, tvSignUp, tvForgetPwd;
-    private Gson gson = GsonHelper.customGson;
 
     private ProgressDialog dialog;
     private String phoneNo, pwd, response;
@@ -175,7 +173,7 @@ public class LoginFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Account/UserInfo");
-            loggedInUser = gson.fromJson(response, ApplicationUser.class);
+            loggedInUser = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

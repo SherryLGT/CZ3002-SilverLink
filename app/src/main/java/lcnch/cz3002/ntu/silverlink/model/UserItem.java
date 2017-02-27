@@ -8,14 +8,14 @@ package lcnch.cz3002.ntu.silverlink.model;
  * @since 21/02/2017
  */
 
-public class FriendItem {
+public class UserItem {
 
     private byte[] profilePicture;
     private String fullName;
 
-    public FriendItem() {};
+    public UserItem() {};
 
-    public FriendItem(byte[] profilePicture, String fullName) {
+    public UserItem(byte[] profilePicture, String fullName) {
         this.profilePicture = profilePicture;
         this.fullName = fullName;
     }

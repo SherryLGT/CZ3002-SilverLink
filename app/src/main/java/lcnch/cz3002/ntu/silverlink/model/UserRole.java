@@ -1,5 +1,7 @@
 package lcnch.cz3002.ntu.silverlink.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  *
@@ -9,7 +11,9 @@ package lcnch.cz3002.ntu.silverlink.model;
  */
 
 public enum UserRole {
+    @SerializedName("1")
     SILVER(1),
+    @SerializedName("2")
     CARER(2);
 
     private final int value;

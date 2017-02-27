@@ -24,7 +24,8 @@
             android:theme="@style/LoginTheme" />
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.FriendActivity" />
-        <activity android:name=".activity.ProfileActivity"></activity>
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.SettingActivity" />
     </application>
 
 </manifest>

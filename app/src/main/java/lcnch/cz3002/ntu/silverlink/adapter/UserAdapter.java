@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.model.FriendItem;
+import lcnch.cz3002.ntu.silverlink.model.UserItem;
 
 /**
  *
@@ -25,18 +25,18 @@ import lcnch.cz3002.ntu.silverlink.model.FriendItem;
  * @since 21/02/2017
  */
 
-public class FriendAdapter extends BaseAdapter {
+public class UserAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<FriendItem> friendItems;
+    private ArrayList<UserItem> userItems;
 
     private ImageView profilePic;
     private TextView fullName;
     private Bitmap bitmap;
 
-    public FriendAdapter(Context context, ArrayList<FriendItem> friendItems) {
+    public UserAdapter(Context context, ArrayList<UserItem> userItems) {
         this.context = context;
-        this.friendItems = friendItems;
+        this.userItems = userItems;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class FriendAdapter extends BaseAdapter {
         profilePic = (ImageView) convertView.findViewById(R.id.iv_profile_pic);
         fullName = (TextView) convertView.findViewById(R.id.tv_name);
 
-        if(friendItems.get(position).getProfilePicture() != null) {
-            bitmap = BitmapFactory.decodeByteArray(friendItems.get(position).getProfilePicture(), 0, friendItems.get(position).getProfilePicture().length);
+        if(userItems.get(position).getProfilePicture() != null) {
+            bitmap = BitmapFactory.decodeByteArray(userItems.get(position).getProfilePicture(), 0, userItems.get(position).getProfilePicture().length);
             profilePic.setImageBitmap(bitmap);
         }
         else {
@@ -59,19 +59,19 @@ public class FriendAdapter extends BaseAdapter {
             else
                 profilePic.setImageResource(R.drawable.default_girl);
         }
-        fullName.setText(friendItems.get(position).getFullName());
+        fullName.setText(userItems.get(position).getFullName());
 
         return convertView;
     }
 
     @Override
     public int getCount() {
-        return friendItems.size();
+        return userItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return friendItems.get(position);
+        return userItems.get(position);
     }
 
     @Override

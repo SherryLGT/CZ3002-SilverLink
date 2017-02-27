@@ -7,9 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.gson.Gson;
-
 import lcnch.cz3002.ntu.silverlink.R;
+import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
@@ -24,7 +23,6 @@ import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 public class SplashActivity extends AppCompatActivity {
 
     public static SharedPreferences sharedPreferences;
-    private Gson gson;
     private String response;
     public static ApplicationUser loggedInUser;
 
@@ -52,7 +50,6 @@ public class SplashActivity extends AppCompatActivity {
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            gson = new Gson();
             loggedInUser = new ApplicationUser();
         }
 
@@ -64,7 +61,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Account/UserInfo");
-            loggedInUser = gson.fromJson(response, ApplicationUser.class);
+            loggedInUser = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

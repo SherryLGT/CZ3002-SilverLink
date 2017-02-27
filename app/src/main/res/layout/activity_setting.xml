@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_steel"
+    tools:context="lcnch.cz3002.ntu.silverlink.activity.SettingActivity">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/outer_padding"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/title_font_size"
+        android:text="@string/title_setting"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_add_carer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:padding="@dimen/outer_padding"
+        android:background="@color/light_blue"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_phone_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/outer_padding"
+            android:text="@string/prompt_phone_no"
+            android:labelFor="@+id/et_phone_no"/>
+
+        <EditText
+            android:id="@+id/et_phone_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_phone_no"
+            android:layout_marginStart="@dimen/slight_margin"
+            android:padding="@dimen/text_box_padding"
+            android:background="@drawable/border_text_box"
+            android:inputType="phone"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:imeOptions="actionDone"/>
+
+        <ImageView
+            android:id="@+id/iv_profile_pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/et_phone_no"
+            android:layout_marginTop="@dimen/outer_padding"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/iv_profile_pic"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_profile_pic"
+            android:layout_marginTop="@dimen/outer_padding"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tv_not_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_phone_no"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tv_not_found"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/text_box_break"
+            android:padding="@dimen/text_box_padding"
+            android:background="@drawable/round_button"
+            android:textSize="@dimen/sml_font_size"
+            android:text="@string/btn_cancel"/>
+
+        <Button
+            android:id="@+id/btn_add_carer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/text_box_break"
+            android:padding="@dimen/text_box_padding"
+            android:background="@drawable/round_button"
+            android:textSize="@dimen/sml_font_size"
+            android:text="@string/btn_add_carer"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_carer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_add_carer"
+        android:paddingStart="@dimen/outer_padding"
+        android:paddingEnd="@dimen/outer_padding"
+        android:text="@string/tv_carer"/>
+
+    <ListView
+        android:id="@+id/lv_carer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_carer"/>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/slight_margin"
+        android:padding="@dimen/text_box_padding"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/round_button"
+        android:textSize="@dimen/sml_font_size"
+        android:text="@string/btn_add_carer"/>
+</RelativeLayout>
+

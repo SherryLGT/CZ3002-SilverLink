@@ -20,8 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -29,7 +28,7 @@ import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
-import lcnch.cz3002.ntu.silverlink.model.Friend;
+import lcnch.cz3002.ntu.silverlink.model.UserRole;
 
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
 import static lcnch.cz3002.ntu.silverlink.fragment.FriendFragment.friendList;
@@ -53,7 +52,7 @@ public class AddFriendFragment extends Fragment {
     private ProgressDialog dialog;
     private String phoneNo, response;
     private ApplicationUser user;
-    private Gson gson = GsonHelper.customGson;
+
     /**
      * Default constructor for AddFriendFragment
      */
@@ -125,13 +124,12 @@ public class AddFriendFragment extends Fragment {
     private class findFriend extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-
             dialog.show();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if(user != null) {
+            if(user != null && user.getRole() == UserRole.SILVER) {
                 if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length);
                     ivProfilePic.setImageBitmap(Bitmap.createScaledBitmap(bitmap, ivProfilePic.getWidth(), ivProfilePic.getHeight(), false));
@@ -145,11 +143,11 @@ public class AddFriendFragment extends Fragment {
 
                 btnAddFriend.setVisibility(View.VISIBLE);
                 tvNotFound.setVisibility(View.GONE);
-                for(Friend friend : friendList) {
-                   if(friend.equals(friendList)) {
-                       btnAddFriend.setVisibility(View.GONE);
-                       break;
-                   }
+                for(int i = 0; i < friendList.size(); i++) {
+                    if(user.getId().equals(friendList.get(i).getUser().getId())) {
+                        btnAddFriend.setVisibility(View.GONE);
+                        break;
+                    }
                 }
                 if(loggedInUser.getId().equals(user.getId())) {
                     btnAddFriend.setVisibility(View.GONE);
@@ -168,7 +166,7 @@ public class AddFriendFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Users/" + phoneNo);
-            user = gson.fromJson(response, ApplicationUser.class);
+            user = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }
@@ -177,12 +175,12 @@ public class AddFriendFragment extends Fragment {
     private class addFriend extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            gson = new Gson();
+            super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            Toast.makeText(getContext(), "Friend request send", Toast.LENGTH_LONG).show();
         }
 
         @Override

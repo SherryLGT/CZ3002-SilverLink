@@ -35,7 +35,7 @@
         android:inputType="phone"
         android:maxLength="8"
         android:maxLines="1"
-        android:imeOptions="actionDone"/><requestFocus/>
+        android:imeOptions="actionDone"/>
 
     <ImageView
         android:id="@+id/iv_profile_pic"

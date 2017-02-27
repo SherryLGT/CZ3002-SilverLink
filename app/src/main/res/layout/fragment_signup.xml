@@ -25,7 +25,7 @@
         android:background="@drawable/border_text_box"
         android:inputType="phone"
         android:maxLength="8"
-        android:maxLines="1"/><requestFocus/>
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/tv_name"

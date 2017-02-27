@@ -11,19 +11,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.adapter.FriendAdapter;
+import lcnch.cz3002.ntu.silverlink.adapter.UserAdapter;
 import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
-import lcnch.cz3002.ntu.silverlink.model.FriendItem;
+import lcnch.cz3002.ntu.silverlink.model.UserItem;
 
 /**
  *
@@ -39,11 +37,10 @@ public class FriendFragment extends Fragment {
     private Spinner spnSort;
     private ListView lvFriendList;
     private Button btnAddFriend;
-    private Gson gson = GsonHelper.customGson;
 
     private String response;
     public static ArrayList<Friend> friendList;
-    private ArrayList<FriendItem> friendItems;
+    private ArrayList<UserItem> userItems;
 
     /**
      * Default constructor for FriendFragment
@@ -72,9 +69,6 @@ public class FriendFragment extends Fragment {
             }
         });
 
-        // For testing purpose (remove when not needed)
-//        btnAddFriend.performClick();
-
         return rootView;
     }
 
@@ -82,20 +76,20 @@ public class FriendFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             friendList = new ArrayList<Friend>();
-            friendItems = new ArrayList<FriendItem>();
+            userItems = new ArrayList<UserItem>();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            lvFriendList.setAdapter(new FriendAdapter(getContext(), friendItems));
+            lvFriendList.setAdapter(new UserAdapter(getContext(), userItems));
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Friends");
-            friendList = gson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
+            friendList = GsonHelper.customGson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
             for(Friend friend : friendList) {
-                friendItems.add(new FriendItem(friend.getUser().getProfilePicture(), friend.getUser().getFullName()));
+                userItems.add(new UserItem(friend.getUser().getProfilePicture(), friend.getUser().getFullName()));
             }
 
             return null;

@@ -2,9 +2,9 @@ package lcnch.cz3002.ntu.silverlink.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -64,8 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // For testing purpose (remove when not needed)
-//        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
+        startActivity(intent);
     }
 
     @Override

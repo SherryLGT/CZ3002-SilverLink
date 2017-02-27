@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lcnch.cz3002.ntu.silverlink.fragment.FriendFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/outer_padding"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/title_font_size"
+        android:text="@string/title_friend_list"/>
+
+    <Spinner
+        android:id="@+id/spn_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:paddingStart="@dimen/slight_margin"
+        android:paddingEnd="@dimen/slight_margin"
+        android:entries="@array/sort_by"/>
+
+    <ListView
+        android:id="@+id/lv_friend_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spn_sort"/>
+
+    <Button
+        android:id="@+id/btn_add_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/slight_margin"
+        android:padding="@dimen/text_box_padding"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/round_button"
+        android:textSize="@dimen/sml_font_size"
+        android:text="@string/btn_add_friend"/>
+</RelativeLayout>

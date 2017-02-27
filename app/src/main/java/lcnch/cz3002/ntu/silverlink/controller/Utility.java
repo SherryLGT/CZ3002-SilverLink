@@ -6,7 +6,6 @@ import android.content.Context;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -23,7 +22,7 @@ import java.net.URL;
 
 public class Utility {
     // Web service url
-    final static String API_URL = "https://lcnch-silverlink.azurewebsites.net/";
+    final static String API_URL = "http://lcnch-silverlink.azurewebsites.net/";
 
     public static String accessToken = "";
 
@@ -61,7 +60,6 @@ public class Utility {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
-
                 urlConnection.setDoOutput(true);
                 urlConnection.setFixedLengthStreamingMode(para.getBytes().length);
 

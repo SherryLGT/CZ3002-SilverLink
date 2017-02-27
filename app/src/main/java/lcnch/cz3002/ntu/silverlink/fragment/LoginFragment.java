@@ -16,14 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.activity.HomeActivity;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
-import lcnch.cz3002.ntu.silverlink.model.LoginParameter;
+import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
+import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.sharedPreferences;
 
 /**
@@ -41,10 +43,9 @@ public class LoginFragment extends Fragment {
     private Button btnLogin;
     private TextView tvErrorMsg, tvSignUp, tvForgetPwd;
 
+    private Gson gson;
     private ProgressDialog dialog;
-    private LoginParameter parameters;
-    private String response;
-    private boolean valid;
+    private String phoneNo, pwd, response;
 
     /**
      * Default constructor for LoginFragment
@@ -94,16 +95,17 @@ public class LoginFragment extends Fragment {
                     etPhoneNo.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
                     etPwd.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.border_text_box));
 
-                    parameters = new LoginParameter(etPhoneNo.getText().toString(), etPwd.getText().toString());
+                    phoneNo = etPhoneNo.getText().toString();
+                    pwd = etPwd.getText().toString();
                     new getToken().execute();
                 }
                 if(etPhoneNo.getText().length() <  8) {
                     tvErrorMsg.setVisibility(View.VISIBLE);
-                    etPhoneNo.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.redborder_text_box));
+                    etPhoneNo.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.red_border_text_box));
                 }
                 if(etPwd.getText().length() == 0) {
                     tvErrorMsg.setVisibility(View.VISIBLE);
-                    etPwd.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.redborder_text_box));
+                    etPwd.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.red_border_text_box));
                 }
             }
         });
@@ -141,6 +143,7 @@ public class LoginFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit().putString("accesstoken", Utility.accessToken);
                 editor.commit();
 
+                new getUserInfo().execute();
                 Intent intent = new Intent(getContext(), HomeActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -152,7 +155,27 @@ public class LoginFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = Utility.postRequest("Token", parameters.getGrantType() + "&username=" + parameters.getPhoneNumber() + "&password=" + parameters.getPassword());
+            response = Utility.postRequest("Token", "grant_type=password&username=" + phoneNo + "&password=" + pwd);
+
+            return null;
+        }
+    }
+
+    private class getUserInfo extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            gson = new Gson();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            response = Utility.getRequest("api/Account/UserInfo");
+            loggedInUser = gson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

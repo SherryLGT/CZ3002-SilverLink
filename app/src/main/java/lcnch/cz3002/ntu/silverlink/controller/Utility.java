@@ -22,7 +22,7 @@ import java.net.URL;
 
 public class Utility {
     // Web service url
-    final static String API_URL = "http://lcnch-silverlink.azurewebsites.net/";
+    final static String API_URL = "https://lcnch-silverlink.azurewebsites.net/";
 
     public static String accessToken = "";
 

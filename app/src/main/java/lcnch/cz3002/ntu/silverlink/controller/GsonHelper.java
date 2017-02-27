@@ -20,7 +20,7 @@ import com.google.gson.JsonSerializer;
 
 public class GsonHelper {
     public static final Gson customGson = new GsonBuilder().registerTypeHierarchyAdapter(byte[].class,
-            new ByteArrayToBase64TypeAdapter()).create();
+            new ByteArrayToBase64TypeAdapter()).setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create();
 
     // Using Android's base64 libraries. This can be replaced with any base64 library.
     private static class ByteArrayToBase64TypeAdapter implements JsonSerializer<byte[]>, JsonDeserializer<byte[]> {

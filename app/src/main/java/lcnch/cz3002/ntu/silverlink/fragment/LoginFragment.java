@@ -22,6 +22,7 @@ import com.google.gson.JsonParser;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.activity.HomeActivity;
+import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
@@ -42,8 +43,8 @@ public class LoginFragment extends Fragment {
     private EditText etPhoneNo, etPwd;
     private Button btnLogin;
     private TextView tvErrorMsg, tvSignUp, tvForgetPwd;
+    private Gson gson = GsonHelper.customGson;
 
-    private Gson gson;
     private ProgressDialog dialog;
     private String phoneNo, pwd, response;
 
@@ -164,7 +165,6 @@ public class LoginFragment extends Fragment {
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            gson = new Gson();
         }
 
         @Override

@@ -20,6 +20,7 @@ import java.util.List;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.FriendAdapter;
+import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
 import lcnch.cz3002.ntu.silverlink.model.FriendItem;
@@ -38,8 +39,8 @@ public class FriendFragment extends Fragment {
     private Spinner spnSort;
     private ListView lvFriendList;
     private Button btnAddFriend;
+    private Gson gson = GsonHelper.customGson;
 
-    private Gson gson;
     private String response;
     public static ArrayList<Friend> friendList;
     private ArrayList<FriendItem> friendItems;
@@ -80,7 +81,6 @@ public class FriendFragment extends Fragment {
     private class getFriends extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create();
             friendList = new ArrayList<Friend>();
             friendItems = new ArrayList<FriendItem>();
         }

@@ -25,7 +25,6 @@ import android.widget.Toast;
 import java.util.Random;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 import lcnch.cz3002.ntu.silverlink.model.UserRole;
@@ -166,7 +165,7 @@ public class AddFriendFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Users/" + phoneNo);
-            user = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
+            user = Utility.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

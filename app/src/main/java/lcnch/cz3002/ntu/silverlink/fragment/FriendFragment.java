@@ -18,7 +18,6 @@ import java.util.List;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.UserAdapter;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
 import lcnch.cz3002.ntu.silverlink.model.UserItem;
@@ -87,7 +86,7 @@ public class FriendFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Friends");
-            friendList = GsonHelper.customGson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
+            friendList = Utility.customGson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
             for(Friend friend : friendList) {
                 userItems.add(new UserItem(friend.getUser().getProfilePicture(), friend.getUser().getFullName()));
             }

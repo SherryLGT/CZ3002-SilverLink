@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
@@ -61,7 +60,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Account/UserInfo");
-            loggedInUser = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
+            loggedInUser = Utility.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

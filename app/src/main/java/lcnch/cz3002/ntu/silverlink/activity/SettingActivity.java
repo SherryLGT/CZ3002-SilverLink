@@ -32,7 +32,6 @@ import java.util.Random;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.UserAdapter;
-import lcnch.cz3002.ntu.silverlink.controller.GsonHelper;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 import lcnch.cz3002.ntu.silverlink.model.UserItem;
@@ -186,7 +185,7 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/User/Carers");
-            carerList = GsonHelper.customGson.fromJson(response, new TypeToken<List<ApplicationUser>>() {}.getType());
+            carerList = Utility.customGson.fromJson(response, new TypeToken<List<ApplicationUser>>() {}.getType());
             for(ApplicationUser carer : carerList) {
                 userItems.add(new UserItem(carer.getProfilePicture(), carer.getFullName()));
             }
@@ -240,7 +239,7 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Users/" + phoneNo);
-            user = GsonHelper.customGson.fromJson(response, ApplicationUser.class);
+            user = Utility.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }

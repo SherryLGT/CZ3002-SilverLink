@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/outer_padding"
+    tools:context="lcnch.cz3002.ntu.silverlink.fragment.AddFriendFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/outer_padding"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/title_font_size"
+        android:text="@string/title_add_friend"/>
+
+    <TextView
+        android:id="@+id/tv_phone_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="@dimen/outer_padding"
+        android:text="@string/prompt_phone_no"
+        android:labelFor="@+id/et_phone_no"/>
+
+    <EditText
+        android:id="@+id/et_phone_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_phone_no"
+        android:layout_below="@id/tv_title"
+        android:layout_marginStart="@dimen/slight_margin"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/border_text_box"
+        android:inputType="phone"
+        android:maxLength="8"
+        android:maxLines="1"
+        android:imeOptions="actionDone"/><requestFocus/>
+
+    <ImageView
+        android:id="@+id/iv_profile_pic"
+        android:layout_width="@dimen/profile_img_size"
+        android:layout_height="@dimen/profile_img_size"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_phone_no"
+        android:contentDescription="@string/iv_profile_pic"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_profile_pic"
+        android:layout_marginTop="@dimen/outer_padding"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tv_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone_no"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tv_not_found"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_add_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_box_break"
+        android:padding="@dimen/text_box_padding"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/round_button"
+        android:textSize="@dimen/sml_font_size"
+        android:text="@string/btn_add_friend"
+        android:visibility="gone"/>
+</RelativeLayout>

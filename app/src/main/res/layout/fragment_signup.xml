@@ -8,21 +8,31 @@
     tools:context="lcnch.cz3002.ntu.silverlink.fragment.SignupFragment">
 
     <TextView
-        android:id="@+id/tv_sign_up"
+        android:id="@+id/tv_phone_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/light_blue"
-        android:textSize="@dimen/title_font_size"
-        android:text="@string/tv_signup"/>
+        android:layout_marginTop="@dimen/outer_padding"
+        android:textColor="@color/white"
+        android:text="@string/prompt_phone_no"
+        android:labelFor="@+id/et_phone_no"/>
+
+    <EditText
+        android:id="@+id/et_phone_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone_no"
+        android:padding="@dimen/text_box_padding"
+        android:background="@drawable/border_text_box"
+        android:inputType="phone"
+        android:maxLength="8"
+        android:maxLines="1"/><requestFocus/>
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_sign_up"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/et_phone_no"
+        android:layout_marginTop="@dimen/text_box_break"
         android:textColor="@color/white"
         android:text="@string/prompt_name"
         android:labelFor="@+id/et_name"/>
@@ -35,7 +45,7 @@
         android:padding="@dimen/text_box_padding"
         android:background="@drawable/border_text_box"
         android:inputType="textAutoComplete"
-        android:maxLines="1"/><requestFocus/>
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/tv_pwd"

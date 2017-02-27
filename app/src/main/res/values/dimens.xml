@@ -8,6 +8,9 @@
     <dimen name="text_box_break">5dp</dimen>
     <dimen name="text_box_padding">10dp</dimen>
     <dimen name="img_size">30dp</dimen>
+    <dimen name="profile_img_size">150dp</dimen>
+    <dimen name="slight_margin">15dp</dimen>
+    <dimen name="margin_top">40dp</dimen>
 
     <dimen name="sml_font_size">25sp</dimen>
     <dimen name="font_size">30sp</dimen>

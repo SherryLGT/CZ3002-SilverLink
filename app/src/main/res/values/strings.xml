@@ -5,7 +5,7 @@
     <string name="error_msg">Error message</string>
 
     <!-- LOGIN / SIGN UP -->
-    <string name="prompt_name">Name</string>
+    <string name="prompt_name">Full Name</string>
     <string name="prompt_phone_no">Phone No.</string>
     <string name="prompt_pwd">Password</string>
     <string name="prompt_pwd2">Confirm Password</string>
@@ -28,4 +28,9 @@
     <string name="title_add_friend">Add Friend</string>
     <string name="iv_profile_pic">Profile Picture</string>
     <string name="btn_add_friend">Add Friend</string>
+    <string-array name="sort_by">
+        <item>Alphabetical (A-Z)</item>
+        <item>Recent Messages</item>
+    </string-array>
+    <string name="tv_not_found">Not Found</string>
 </resources>

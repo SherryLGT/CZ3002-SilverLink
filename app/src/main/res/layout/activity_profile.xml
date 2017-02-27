@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_steel"
+    tools:context="lcnch.cz3002.ntu.silverlink.activity.ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/spn_sort"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_steel"
+            android:padding="@dimen/outer_padding">
+
+
+            <ImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/iv_profile_pic" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_profile_pic"
+                android:layout_marginTop="@dimen/outer_padding"
+                android:labelFor="@+id/et_name"
+                android:text="@string/prompt_name" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:background="@drawable/border_text_box"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:padding="@dimen/text_box_padding" />
+
+            <requestFocus />
+
+
+            <TextView
+                android:id="@+id/tv_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_name"
+                android:layout_marginTop="@dimen/text_box_break"
+                android:labelFor="@+id/et_pwd"
+                android:text="@string/prompt_oldpwd" />
+
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pwd"
+                android:background="@drawable/border_text_box"
+                android:hint="(unchanged)"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="@dimen/text_box_padding" />
+
+            <TextView
+                android:id="@+id/tv_pwd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_pwd"
+                android:layout_marginTop="@dimen/text_box_break"
+                android:labelFor="@+id/et_pwd2"
+                android:text="@string/prompt_newpwd" />
+
+            <EditText
+                android:id="@+id/et_pwd2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pwd2"
+                android:background="@drawable/border_text_box"
+                android:hint="(unchanged)"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="@dimen/text_box_padding" />
+
+            <Button
+                android:id="@+id/btn_update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_pwd2"
+                android:background="@drawable/round_button"
+                android:padding="@dimen/text_box_padding"
+                android:text="@string/btn_update_profile"
+                android:textAllCaps="true"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/sml_font_size"
+                android:layout_marginTop="@dimen/outer_padding"/>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

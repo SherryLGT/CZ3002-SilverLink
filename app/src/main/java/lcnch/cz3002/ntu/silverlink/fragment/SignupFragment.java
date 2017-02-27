@@ -1,4 +1,4 @@
-package lcnch.cz3002.ntu.silverlink;
+package lcnch.cz3002.ntu.silverlink.fragment;
 
 
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import model.ApplicationUser;
+import lcnch.cz3002.ntu.silverlink.R;
+import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
 
 /**

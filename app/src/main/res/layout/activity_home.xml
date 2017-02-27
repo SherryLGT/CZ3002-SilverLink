@@ -4,7 +4,7 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lcnch.cz3002.ntu.silverlink.HomeActivity">
+    tools:context="lcnch.cz3002.ntu.silverlink.activity.HomeActivity">
 
     <TableRow
         android:id="@+id/table_row1"
@@ -12,19 +12,27 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/btn_friend"
+        <ImageButton
+            android:id="@+id/ib_friend"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/nav_friend"/>
+            android:background="@drawable/flat_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_empty"
+            android:contentDescription="@string/nav_friend"/>
 
-        <Button
-            android:id="@+id/btn_group"
+        <ImageButton
+            android:id="@+id/ib_group"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/nav_group" />
+            android:background="@drawable/flat_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_empty"
+            android:contentDescription="@string/nav_group"/>
     </TableRow>
 
     <TableRow
@@ -33,19 +41,27 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/btn_profile"
+        <ImageButton
+            android:id="@+id/ib_profile"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/nav_profile" />
+            android:background="@drawable/flat_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_empty"
+            android:contentDescription="@string/nav_profile"/>
 
-        <Button
-            android:id="@+id/btn_setting"
+        <ImageButton
+            android:id="@+id/ib_setting"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/nav_setting" />
+            android:background="@drawable/flat_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_empty"
+            android:contentDescription="@string/nav_setting"/>
     </TableRow>
 
 </TableLayout>

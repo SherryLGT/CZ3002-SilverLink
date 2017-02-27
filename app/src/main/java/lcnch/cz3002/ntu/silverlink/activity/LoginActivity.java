@@ -1,7 +1,10 @@
-package lcnch.cz3002.ntu.silverlink;
+package lcnch.cz3002.ntu.silverlink.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import lcnch.cz3002.ntu.silverlink.fragment.LoginFragment;
+import lcnch.cz3002.ntu.silverlink.R;
 
 /**
  *

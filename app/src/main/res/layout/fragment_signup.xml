@@ -5,7 +5,7 @@
     android:id="@+id/fragment_signup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lcnch.cz3002.ntu.silverlink.SignupFragment">
+    tools:context="lcnch.cz3002.ntu.silverlink.fragment.SignupFragment">
 
     <TextView
         android:id="@+id/tv_sign_up"

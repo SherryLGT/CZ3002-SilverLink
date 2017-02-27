@@ -7,6 +7,6 @@
     android:padding="@dimen/outer_padding"
     android:background="@color/blue"
     android:animateLayoutChanges="true"
-    tools:context="lcnch.cz3002.ntu.silverlink.LoginActivity">
+    tools:context="lcnch.cz3002.ntu.silverlink.activity.LoginActivity">
 
 </FrameLayout>

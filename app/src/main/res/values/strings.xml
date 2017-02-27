@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SilverLink</string>
-    <string name="app_logo">Link</string>
+    <string name="app_logo">Logo</string>
+    <string name="splashscreen">Splashscreen</string>
     <string name="error_msg">Error message</string>
 
     <!-- LOGIN / SIGN UP -->
@@ -22,4 +23,9 @@
     <string name="nav_profile">Profile</string>
     <string name="nav_setting">Setting</string>
 
+    <!-- FRIEND -->
+    <string name="title_friend_list">Friend List</string>
+    <string name="title_add_friend">Add Friend</string>
+    <string name="iv_profile_pic">Profile Picture</string>
+    <string name="btn_add_friend">Add Friend</string>
 </resources>

@@ -1,4 +1,4 @@
-package model;
+package lcnch.cz3002.ntu.silverlink.model;
 
 import java.util.ArrayList;
 

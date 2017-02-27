@@ -1,4 +1,4 @@
-package model;
+package lcnch.cz3002.ntu.silverlink.model;
 
 import android.location.Location;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ApplicationUser {
 
     private String fullName;
-    private Byte[] profilePicture;
+    private byte[] profilePicture;
     private UserRole role;
     private String deviceId;
     private String id;
@@ -23,7 +23,7 @@ public class ApplicationUser {
 
     public ApplicationUser() {}
 
-    public ApplicationUser(String fullName, Byte[] profilePicture, UserRole role, String deviceId, String id, String phoneNumber) {
+    public ApplicationUser(String fullName, byte[] profilePicture, UserRole role, String deviceId, String id, String phoneNumber) {
         this.fullName = fullName;
         this.profilePicture = profilePicture;
         this.role = role;
@@ -40,11 +40,11 @@ public class ApplicationUser {
         this.fullName = fullName;
     }
 
-    public Byte[] getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Byte[] profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 

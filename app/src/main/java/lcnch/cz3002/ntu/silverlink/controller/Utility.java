@@ -1,4 +1,7 @@
-package controller;
+package lcnch.cz3002.ntu.silverlink.controller;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -20,7 +23,7 @@ import java.net.URL;
 
 public class Utility {
     // Web service url
-    final static String API_URL = "http://lcnch-silverlink.azurewebsites.net/";
+    final static String API_URL = "https://lcnch-silverlink.azurewebsites.net/";
 
     public static String accessToken = "";
 
@@ -92,5 +95,13 @@ public class Utility {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static ProgressDialog SetupLoadingDialog(Context context, ProgressDialog dialog) {
+        dialog = new ProgressDialog(context);
+        dialog.setMessage("Loading...");
+        dialog.setCancelable(false);
+
+        return dialog;
     }
 }

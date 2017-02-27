@@ -5,15 +5,16 @@
     android:id="@+id/fragment_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lcnch.cz3002.ntu.silverlink.LoginFragment">
+    tools:context="lcnch.cz3002.ntu.silverlink.fragment.LoginFragment">
 
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="@dimen/logo_size"
         android:layout_height="@dimen/logo_size"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/link"
+        android:src="@drawable/logo_white"
         android:contentDescription="@string/app_logo"/>
 
     <TextView

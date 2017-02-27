@@ -5,6 +5,14 @@
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lcnch.cz3002.ntu.silverlink.SplashActivity">
+    android:background="@color/blue"
+    tools:context="lcnch.cz3002.ntu.silverlink.activity.SplashActivity">
+
+    <ImageView
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo_white"
+        android:contentDescription="@string/splashscreen" />
 
 </RelativeLayout>

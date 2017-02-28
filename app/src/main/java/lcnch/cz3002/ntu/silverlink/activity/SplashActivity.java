@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         else {
             new getUserInfo().execute();
+            startService(new Intent(this, LocationService.class));
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();

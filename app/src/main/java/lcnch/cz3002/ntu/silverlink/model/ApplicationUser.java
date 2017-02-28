@@ -1,7 +1,5 @@
 package lcnch.cz3002.ntu.silverlink.model;
 
-import android.location.Location;
-
 import java.util.ArrayList;
 
 /**

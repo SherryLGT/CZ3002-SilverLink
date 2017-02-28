@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
@@ -32,19 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         Utility.accessToken = sharedPreferences.getString("accesstoken", "");
-
-        if(Utility.accessToken.equals("")) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            new getUserInfo().execute();
-            startService(new Intent(this, LocationService.class));
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        new getUserInfo().execute();
     }
 
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
@@ -55,13 +44,29 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            if(loggedInUser != null) {
+                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                startService(new Intent(this, LocationService.class));
+                startActivity(intent);
+                finish();
+                Toast.makeText(SplashActivity.this, "Welcome back", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Account/UserInfo");
-            loggedInUser = Utility.customGson.fromJson(response, ApplicationUser.class);
+            if(response != null) {
+                loggedInUser = Utility.customGson.fromJson(response, ApplicationUser.class);
+            }
+            else {
+                Utility.accessToken = "";
+            }
 
             return null;
         }

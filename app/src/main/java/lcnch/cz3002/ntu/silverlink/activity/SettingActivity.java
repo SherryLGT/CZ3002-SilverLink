@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -38,6 +40,7 @@ import lcnch.cz3002.ntu.silverlink.model.UserItem;
 import lcnch.cz3002.ntu.silverlink.model.UserRole;
 
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
+import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.sharedPreferences;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -130,9 +133,7 @@ public class SettingActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 new addCarer().execute();
-                                Intent intent = getIntent();
-                                finish();
-                                startActivity(intent);
+                                btnCancel.performClick();
                             }
                         }).setNegativeButton("No", null).show();
                 TextView textView = (TextView) dialog.findViewById(android.R.id.message);
@@ -158,9 +159,11 @@ public class SettingActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Utility.accessToken = "";
+                                SharedPreferences.Editor editor = sharedPreferences.edit().putString("accesstoken", Utility.accessToken);
+                                editor.commit();
                                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                                 startActivity(intent);
-                                finish();
+                                finishAffinity();
                             }
                         }).setNegativeButton("No", null).show();
                 TextView textView = (TextView) dialog.findViewById(android.R.id.message);
@@ -253,7 +256,7 @@ public class SettingActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            Toast.makeText(SettingActivity.this, "Caregiver added", Toast.LENGTH_LONG).show();
         }
 
         @Override

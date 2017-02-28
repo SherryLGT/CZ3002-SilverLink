@@ -140,13 +140,13 @@ public class SignupFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
+
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.postRequest("api/Account/Register", jsonObject.toString());
-
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
 
             return null;
         }

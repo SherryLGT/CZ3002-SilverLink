@@ -46,4 +46,9 @@
     <string name="tv_carer">Caregivers</string>
     <string name="btn_add_carer">Add Caregiver</string>
     <string name="action_logout">Logout</string>
+
+    <!-- MESSAGE -->
+    <string name="iv_msg">Message</string>
+    <string name="tv_play">Play</string>
+    <string name="ib_record">Record</string>
 </resources>

@@ -10,10 +10,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import lcnch.cz3002.ntu.silverlink.R;
+import lcnch.cz3002.ntu.silverlink.controller.LocationService;
 
 /**
- *
- *
  * @author Sherry Lau Geok Teng
  * @version 1.0
  * @since 20/02/2017
@@ -32,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         ibGroup = (ImageButton) findViewById(R.id.ib_group);
         ibProfile = (ImageButton) findViewById(R.id.ib_profile);
         ibSetting = (ImageButton) findViewById(R.id.ib_setting);
+
+        startService(new Intent(this, LocationService.class));
 
         ibFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // For testing purpose (remove when not needed)
-        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
+//        startActivity(intent);
     }
 
     @Override

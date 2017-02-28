@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import lcnch.cz3002.ntu.silverlink.R;
+import lcnch.cz3002.ntu.silverlink.controller.LocationService;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 
@@ -38,15 +39,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
-        protected void onPreExecute() {
-            loggedInUser = new ApplicationUser();
-        }
+        protected void onPreExecute() { }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             if(loggedInUser != null) {
                 Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
-                startService(new Intent(this, LocationService.class));
                 startActivity(intent);
                 finish();
                 Toast.makeText(SplashActivity.this, "Welcome back", Toast.LENGTH_SHORT).show();

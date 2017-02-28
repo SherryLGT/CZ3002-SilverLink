@@ -16,6 +16,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJW2OEMWvfdX8BdimTs8e9sQbqzmARc34" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_empty" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/blue" />
+
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">

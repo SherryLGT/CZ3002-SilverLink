@@ -10,58 +10,62 @@
         android:id="@+id/table_row1"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <ImageButton
             android:id="@+id/ib_friend"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/flat_button"
             android:adjustViewBounds="true"
+            android:background="@drawable/flat_button"
+            android:contentDescription="@string/nav_friend"
+            android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/friends"
-            android:contentDescription="@string/nav_friend"/>
+            android:src="@drawable/friends" />
 
         <ImageButton
             android:id="@+id/ib_group"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/flat_button"
             android:adjustViewBounds="true"
+            android:background="@drawable/flat_button"
+            android:contentDescription="@string/nav_group"
+            android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/groups"
-            android:contentDescription="@string/nav_group"/>
+            android:src="@drawable/groups" />
     </TableRow>
 
     <TableRow
         android:id="@+id/table_row2"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <ImageButton
             android:id="@+id/ib_profile"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/flat_button"
             android:adjustViewBounds="true"
+            android:background="@drawable/flat_button"
+            android:contentDescription="@string/nav_profile"
+            android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/profile"
-            android:contentDescription="@string/nav_profile"/>
+            android:src="@drawable/profile" />
 
         <ImageButton
             android:id="@+id/ib_setting"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/flat_button"
             android:adjustViewBounds="true"
+            android:background="@drawable/flat_button"
+            android:contentDescription="@string/nav_setting"
+            android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/settings"
-            android:contentDescription="@string/nav_setting"/>
+            android:src="@drawable/settings" />
     </TableRow>
 
 </TableLayout>

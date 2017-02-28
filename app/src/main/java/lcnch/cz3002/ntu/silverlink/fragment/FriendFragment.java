@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -37,9 +38,11 @@ public class FriendFragment extends Fragment {
     private ListView lvFriendList;
     private Button btnAddFriend;
 
+    private boolean recent;
     private String response;
     public static ArrayList<Friend> friendList;
     private ArrayList<UserItem> userItems;
+    public static Friend friend;
 
     /**
      * Default constructor for FriendFragment
@@ -59,12 +62,39 @@ public class FriendFragment extends Fragment {
         lvFriendList = (ListView) rootView.findViewById(R.id.lv_friend_list);
         btnAddFriend = (Button) rootView.findViewById(R.id.btn_add_friend);
 
-        new getFriends().execute();
+        spnSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 0: // alphabetical
+                        recent = false;
+                        new getFriends().execute();
+                        break;
+                    case 1: // recent messages
+                        recent = true;
+                        new getFriends().execute();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        lvFriendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                friend = friendList.get(position);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new MessageFragment(), "MessageFragment").commit();
+            }
+        });
 
         btnAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new AddFriendFragment()).addToBackStack("AddFriendFragment").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new AddFriendFragment(), "AddFriendFragment").commit();
             }
         });
 
@@ -85,7 +115,7 @@ public class FriendFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = Utility.getRequest("api/Friends");
+            response = Utility.getRequest("api/Friends?recent=" + recent); // true - recent messages, false - alphabetical
             friendList = Utility.customGson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
             for(Friend friend : friendList) {
                 userItems.add(new UserItem(friend.getUser().getProfilePicture(), friend.getUser().getFullName()));
@@ -94,5 +124,4 @@ public class FriendFragment extends Fragment {
             return null;
         }
     }
-
 }

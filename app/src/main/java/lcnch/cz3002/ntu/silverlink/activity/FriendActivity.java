@@ -15,4 +15,14 @@ public class FriendActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new FriendFragment()).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().findFragmentByTag("MessageFragment") != null || getSupportFragmentManager().findFragmentByTag("AddFriendFragment") != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new FriendFragment()).commit();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

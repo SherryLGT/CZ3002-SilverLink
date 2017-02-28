@@ -12,10 +12,9 @@ import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.controller.LocationService;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
+import lcnch.cz3002.ntu.silverlink.model.UserRole;
 
 /**
- *
- *
  * @author Sherry Lau Geok Teng
  * @version 1.0
  * @since 17/02/2017
@@ -39,17 +38,23 @@ public class SplashActivity extends AppCompatActivity {
 
     private class getUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
-        protected void onPreExecute() { }
+        protected void onPreExecute() {
+        }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if(loggedInUser != null) {
-                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+            if (loggedInUser != null) {
+                if (loggedInUser.getRole() == UserRole.SILVER) {
+                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, CaregiverActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 Toast.makeText(SplashActivity.this, "Welcome back", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -59,10 +64,9 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Account/UserInfo");
-            if(response != null) {
+            if (response != null) {
                 loggedInUser = Utility.customGson.fromJson(response, ApplicationUser.class);
-            }
-            else {
+            } else {
                 Utility.accessToken = "";
             }
 

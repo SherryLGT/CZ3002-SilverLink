@@ -24,11 +24,11 @@ import java.io.IOException;
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
+import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ProgressDialog dialog;
-    private ApplicationUser userProfile;
     private Gson gson = Utility.customGson;
     ImageView ivProfilePic;
     EditText etName;
@@ -116,18 +116,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (userProfile.getProfilePicture() != null) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(userProfile.getProfilePicture(), 0, userProfile.getProfilePicture().length);
+            if (loggedInUser.getProfilePicture() != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(loggedInUser.getProfilePicture(), 0, loggedInUser.getProfilePicture().length);
                 ivProfilePic.setImageBitmap(bitmap);
             }
-            etName.setText(userProfile.getFullName());
+            etName.setText(loggedInUser.getFullName());
             dialog.dismiss();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             String response = Utility.getRequest("api/Account/UserInfo");
-            userProfile = gson.fromJson(response, ApplicationUser.class);
+            loggedInUser = gson.fromJson(response, ApplicationUser.class);
 
             return null;
         }
@@ -142,9 +142,9 @@ public class ProfileActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 profileBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
                 byte[] byteArray = stream.toByteArray();
-                userProfile.setProfilePicture(byteArray);
+                loggedInUser.setProfilePicture(byteArray);
             }
-            userProfile.setFullName(etName.getText().toString());
+            loggedInUser.setFullName(etName.getText().toString());
         }
 
         @Override
@@ -155,7 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            String response = Utility.postRequest("api/User", gson.toJson(userProfile));
+            String response = Utility.postRequest("api/User", gson.toJson(loggedInUser));
             return null;
         }
     }

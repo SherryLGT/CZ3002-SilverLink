@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                 int size = profileBitmap.getWidth();
                 if(size>profileBitmap.getHeight())
                     size = profileBitmap.getHeight();
-                profileBitmap = Bitmap.createBitmap(profileBitmap, (profileBitmap.getWidth()-size)/2, (profileBitmap.getHeight()-size)/2, ((profileBitmap.getWidth()-size)/2)+size, ((profileBitmap.getHeight()-size)/2)+size);
+                profileBitmap = Bitmap.createBitmap(profileBitmap, (profileBitmap.getWidth()-size)/2, (profileBitmap.getHeight()-size)/2, size, size);
                 profileBitmap = Bitmap.createScaledBitmap(profileBitmap, 128, 128, false);
                 ivProfilePic.setImageBitmap(profileBitmap);
             } catch (IOException e) {

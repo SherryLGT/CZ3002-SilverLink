@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1085472043846",
+    "firebase_url": "https://silverlink-d0bd9.firebaseio.com",
+    "project_id": "silverlink-d0bd9",
+    "storage_bucket": "silverlink-d0bd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085472043846:android:6d966f89392d4e86",
+        "android_client_info": {
+          "package_name": "lcnch.cz3002.ntu.silverlink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085472043846-v8tt6tjd9qhu6e8hh1ddjlu8bjtibrm2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lcnch.cz3002.ntu.silverlink",
+            "certificate_hash": "dec00ab8dc1b862378f47d8cb11cf15b6e46a84e"
+          }
+        },
+        {
+          "client_id": "1085472043846-gr4jjt3b0g798rr7lvn22lsak6uccvcc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvURYfKR_j3ueG7MxCTsc7GWbP7VM-rwc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085472043846-gr4jjt3b0g798rr7lvn22lsak6uccvcc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

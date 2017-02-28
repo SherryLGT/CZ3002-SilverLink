@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -43,7 +44,7 @@ public class LoginFragment extends Fragment {
     private TextView tvErrorMsg, tvSignUp, tvForgetPwd;
 
     private ProgressDialog dialog;
-    private String phoneNo, pwd, response;
+    private String phoneNo, pwd, response, refreshedToken;
 
     /**
      * Default constructor for LoginFragment
@@ -141,6 +142,10 @@ public class LoginFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit().putString("accesstoken", Utility.accessToken);
                 editor.commit();
 
+                refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+                new sendDeviceId().execute();
+
                 new getUserInfo().execute();
                 Intent intent = new Intent(getContext(), HomeActivity.class);
                 startActivity(intent);
@@ -174,6 +179,23 @@ public class LoginFragment extends Fragment {
             response = Utility.getRequest("api/Account/UserInfo");
             loggedInUser = Utility.customGson.fromJson(response, ApplicationUser.class);
 
+            return null;
+        }
+    }
+
+    private class sendDeviceId extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            response = Utility.postRequest("api/User/DeviceId", "\""+refreshedToken+"\"");
             return null;
         }
     }

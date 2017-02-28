@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         Utility.accessToken = sharedPreferences.getString("accesstoken", "");
-
         new getUserInfo().execute();
     }
 
@@ -47,6 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             if(loggedInUser != null) {
                 Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                startService(new Intent(this, LocationService.class));
                 startActivity(intent);
                 finish();
                 Toast.makeText(SplashActivity.this, "Welcome back", Toast.LENGTH_SHORT).show();

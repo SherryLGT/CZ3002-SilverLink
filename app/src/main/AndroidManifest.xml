@@ -3,6 +3,8 @@
     package="lcnch.cz3002.ntu.silverlink">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,18 @@
         <activity android:name=".activity.FriendActivity" />
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.SettingActivity" />
+
+        <service android:enabled="true" android:name=".controller.LocationService" />
+
+        <!-- [START firebase_service] -->
+        <service android:name=".controller.FCMService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
+
     </application>
+
 
 </manifest>

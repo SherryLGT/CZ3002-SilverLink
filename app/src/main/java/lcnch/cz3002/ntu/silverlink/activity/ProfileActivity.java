@@ -24,6 +24,7 @@ import java.io.IOException;
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
+
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btnUpdateProfile;
     private JsonObject jsonObject;
     Bitmap profileBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 new SetProfile().execute();
 
-                if(!etPwd.getText().toString().equals("") && !etPwd2.getText().toString().equals("")){
+                if (!etPwd.getText().toString().equals("") && !etPwd2.getText().toString().equals("")) {
                     jsonObject = new JsonObject();
                     jsonObject.addProperty("oldPassword", etPwd.getText().toString());
                     jsonObject.addProperty("newPassword", etPwd2.getText().toString());
@@ -95,9 +97,9 @@ public class ProfileActivity extends AppCompatActivity {
                 profileBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
                 // Log.d(TAG, String.valueOf(bitmap));
                 int size = profileBitmap.getWidth();
-                if(size>profileBitmap.getHeight())
+                if (size > profileBitmap.getHeight())
                     size = profileBitmap.getHeight();
-                profileBitmap = Bitmap.createBitmap(profileBitmap, (profileBitmap.getWidth()-size)/2, (profileBitmap.getHeight()-size)/2, size, size);
+                profileBitmap = Bitmap.createBitmap(profileBitmap, (profileBitmap.getWidth() - size) / 2, (profileBitmap.getHeight() - size) / 2, size, size);
                 profileBitmap = Bitmap.createScaledBitmap(profileBitmap, 128, 128, false);
                 ivProfilePic.setImageBitmap(profileBitmap);
             } catch (IOException e) {
@@ -138,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
         protected void onPreExecute() {
             dialog.show();
 
-            if(profileBitmap != null) {
+            if (profileBitmap != null) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 profileBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
                 byte[] byteArray = stream.toByteArray();
@@ -150,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
-            Toast.makeText(getApplicationContext(), "Profile Updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Profile Updated!", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -170,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
-            Toast.makeText(getApplicationContext(), "Password Updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Password Updated!", Toast.LENGTH_LONG).show();
         }
 
         @Override

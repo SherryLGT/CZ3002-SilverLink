@@ -38,7 +38,6 @@ public class SignupFragment extends Fragment {
 
     private ProgressDialog dialog;
     private JsonObject jsonObject;
-    private String response;
 
     /**
      * Default constructor for SignupFragment
@@ -100,7 +99,7 @@ public class SignupFragment extends Fragment {
                     else {
                         jsonObject.addProperty("role", UserRole.CARER.getValue());
                     }
-                    new signUp().execute();
+                    new SignUp().execute();
                 }
                 if(etPhoneNo.getText().toString().length() < 8) {
                     etPhoneNo.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.red_border_text_box));
@@ -131,7 +130,7 @@ public class SignupFragment extends Fragment {
         return rootView;
     }
 
-    private class signUp extends AsyncTask<Void, Void, Void> {
+    private class SignUp extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             dialog.show();
@@ -146,7 +145,7 @@ public class SignupFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = Utility.postRequest("api/Account/Register", jsonObject.toString());
+            Utility.postRequest("api/Account/Register", jsonObject.toString());
 
             return null;
         }

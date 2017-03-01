@@ -6,6 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.fragment.FriendFragment;
 
+/**
+ * @author Sherry Lau Geok Teng
+ * @version 1.0
+ * @since 27/02/2017
+ */
+
 public class FriendActivity extends AppCompatActivity {
 
     @Override

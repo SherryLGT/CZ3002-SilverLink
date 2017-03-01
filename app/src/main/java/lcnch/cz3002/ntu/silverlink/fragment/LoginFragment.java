@@ -96,7 +96,7 @@ public class LoginFragment extends Fragment {
 
                     phoneNo = etPhoneNo.getText().toString();
                     pwd = etPwd.getText().toString();
-                    new getToken().execute();
+                    new GetToken().execute();
                 }
                 if (etPhoneNo.getText().length() < 8) {
                     tvErrorMsg.setVisibility(View.VISIBLE);
@@ -126,7 +126,7 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
-    private class getToken extends AsyncTask<Void, Void, Void> {
+    private class GetToken extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             dialog.show();
@@ -143,10 +143,8 @@ public class LoginFragment extends Fragment {
                 editor.commit();
 
                 refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                new sendDeviceId().execute();
-
-                new getUserInfo().execute();
-
+                new SendDeviceId().execute();
+                new GetUserInfo().execute();
             } else {
                 tvErrorMsg.setVisibility(View.VISIBLE);
             }
@@ -160,7 +158,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private class getUserInfo extends AsyncTask<Void, Void, Void> {
+    private class GetUserInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
         }
@@ -189,7 +187,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private class sendDeviceId extends AsyncTask<Void, Void, Void> {
+    private class SendDeviceId extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
         }

@@ -42,6 +42,12 @@ import lcnch.cz3002.ntu.silverlink.model.UserRole;
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.loggedInUser;
 import static lcnch.cz3002.ntu.silverlink.activity.SplashActivity.sharedPreferences;
 
+/**
+ * @author Sherry Lau Geok Teng
+ * @version 1.0
+ * @since 20/02/2017
+ */
+
 public class SettingActivity extends AppCompatActivity {
 
     private ListView lvCarerList;
@@ -257,6 +263,7 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             Toast.makeText(SettingActivity.this, "Caregiver added", Toast.LENGTH_LONG).show();
+            new loadCarers().execute();
         }
 
         @Override

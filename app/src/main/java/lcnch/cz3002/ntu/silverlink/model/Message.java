@@ -14,14 +14,16 @@ public class Message {
 
     private int id;
     private String messageText;
+    private byte[] messageData;
     private Date sentAt;
     private ApplicationUser.SilverUser sentBy;
 
     public Message() {};
 
-    public Message(int id, String messageText, Date sentAt, ApplicationUser.SilverUser sentBy) {
+    public Message(int id, String messageText, byte[] messageData, Date sentAt, ApplicationUser.SilverUser sentBy) {
         this.id = id;
         this.messageText = messageText;
+        this.messageData = messageData;
         this.sentAt = sentAt;
         this.sentBy = sentBy;
     }
@@ -40,6 +42,14 @@ public class Message {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public byte[] getMessageData() {
+        return messageData;
+    }
+
+    public void setMessageData(byte[] messageData) {
+        this.messageData = messageData;
     }
 
     public Date getSentAt() {

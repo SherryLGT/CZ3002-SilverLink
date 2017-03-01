@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.controller.LocationService;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
 import lcnch.cz3002.ntu.silverlink.model.ApplicationUser;
 import lcnch.cz3002.ntu.silverlink.model.UserRole;

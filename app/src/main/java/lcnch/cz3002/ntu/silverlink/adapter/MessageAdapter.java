@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import lcnch.cz3002.ntu.silverlink.R;
-import lcnch.cz3002.ntu.silverlink.model.MessageItem;
-import lcnch.cz3002.ntu.silverlink.model.UserItem;
+import lcnch.cz3002.ntu.silverlink.model.Message;
 
 /**
  *
@@ -30,15 +29,15 @@ import lcnch.cz3002.ntu.silverlink.model.UserItem;
 public class MessageAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<MessageItem> msgItems;
+    private ArrayList<Message> messageList;
 
     private TextView sentAt, fullName;
     private ImageView profilePic;
     private Bitmap bitmap;
 
-    public MessageAdapter(Context context, ArrayList<MessageItem> msgItems) {
+    public MessageAdapter(Context context, ArrayList<Message> messageList) {
         this.context = context;
-        this.msgItems = msgItems;
+        this.messageList = messageList;
     }
 
     @Override
@@ -53,9 +52,9 @@ public class MessageAdapter extends BaseAdapter {
         fullName = (TextView) convertView.findViewById(R.id.tv_name);
 
         SimpleDateFormat sdf = new SimpleDateFormat("d MMM, h:mm a");
-        sentAt.setText(sdf.format(msgItems.get(position).getSentAt()));
-        if(msgItems.get(position).getProfilePicture() != null) {
-            bitmap = BitmapFactory.decodeByteArray(msgItems.get(position).getProfilePicture(), 0, msgItems.get(position).getProfilePicture().length);
+        sentAt.setText(sdf.format(messageList.get(position).getSentAt()));
+        if(messageList.get(position).getSentBy().getProfilePicture() != null) {
+            bitmap = BitmapFactory.decodeByteArray(messageList.get(position).getSentBy().getProfilePicture(), 0, messageList.get(position).getSentBy().getProfilePicture().length);
             profilePic.setImageBitmap(bitmap);
         }
         else {
@@ -64,19 +63,19 @@ public class MessageAdapter extends BaseAdapter {
             else
                 profilePic.setImageResource(R.drawable.default_girl);
         }
-        fullName.setText(msgItems.get(position).getFullName());
+        fullName.setText(messageList.get(position).getSentBy().getFullName());
 
         return convertView;
     }
 
     @Override
     public int getCount() {
-        return msgItems.size();
+        return messageList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return msgItems.get(position);
+        return messageList.get(position);
     }
 
     @Override

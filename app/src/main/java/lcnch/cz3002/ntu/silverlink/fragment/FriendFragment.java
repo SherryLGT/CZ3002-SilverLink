@@ -68,11 +68,11 @@ public class FriendFragment extends Fragment {
                 switch(position) {
                     case 0: // alphabetical
                         recent = false;
-                        new getFriends().execute();
+                        new GetFriends().execute();
                         break;
                     case 1: // recent messages
                         recent = true;
-                        new getFriends().execute();
+                        new GetFriends().execute();
                         break;
                 }
             }
@@ -101,7 +101,7 @@ public class FriendFragment extends Fragment {
         return rootView;
     }
 
-    private class getFriends extends AsyncTask<Void, Void, Void> {
+    private class GetFriends extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             friendList = new ArrayList<Friend>();

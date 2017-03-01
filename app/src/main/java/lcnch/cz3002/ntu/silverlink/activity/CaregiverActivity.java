@@ -98,13 +98,14 @@ public class CaregiverActivity extends AppCompatActivity implements OnMapReadyCa
         @Override
         protected void onPostExecute(Void aVoid) {
             Toast.makeText(CaregiverActivity.this, "Location Updated", Toast.LENGTH_LONG).show();
-            LatLng loc = new LatLng(silverUser.getLocation().getLatitude(), silverUser.getLocation().getLongitude());
-            map.clear();
-            Marker marker = map.addMarker(new MarkerOptions().position(loc)
-                    .title(silverUser.getFullName()).snippet(silverUser.getLocation().getAcquiredAt().toString()));
-            marker.showInfoWindow();
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 18));
-
+            if(silverUser != null) {
+                LatLng loc = new LatLng(silverUser.getLocation().getLatitude(), silverUser.getLocation().getLongitude());
+                map.clear();
+                Marker marker = map.addMarker(new MarkerOptions().position(loc)
+                        .title(silverUser.getFullName()).snippet(silverUser.getLocation().getAcquiredAt().toString()));
+                marker.showInfoWindow();
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 18));
+            }
         }
 
         @Override

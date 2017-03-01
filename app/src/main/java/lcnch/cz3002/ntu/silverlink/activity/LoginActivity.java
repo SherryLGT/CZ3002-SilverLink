@@ -26,22 +26,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, 0);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
     }
 
     @Override
     public void onBackPressed() {
-        AlertDialog dialog = new AlertDialog.Builder(this).setMessage("Are you sure you want to quit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).setNegativeButton("No", null).show();
-        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(30);
+        if(getSupportFragmentManager().findFragmentByTag("SignupFragment") == null) {
+            AlertDialog dialog = new AlertDialog.Builder(this).setMessage("Are you sure you want to quit?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).setNegativeButton("No", null).show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(30);
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
+        }
     }
 }

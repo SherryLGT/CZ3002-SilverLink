@@ -49,7 +49,7 @@ public class AddFriendFragment extends Fragment {
     private Button btnAddFriend;
 
     private ProgressDialog dialog;
-    private String phoneNo, response;
+    private String phoneNo;
     private ApplicationUser user;
 
     /**
@@ -84,7 +84,6 @@ public class AddFriendFragment extends Fragment {
         etPhoneNo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -95,7 +94,7 @@ public class AddFriendFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if(etPhoneNo.getText().toString().length() == 8) {
                     phoneNo = etPhoneNo.getText().toString();
-                    new findFriend().execute();
+                    new FindFriend().execute();
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
                 }
@@ -109,7 +108,7 @@ public class AddFriendFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                new addFriend().execute();
+                                new AddFriend().execute();
                             }
                         }).setNegativeButton("No", null).show();
                 TextView textView = (TextView) dialog.findViewById(android.R.id.message);
@@ -120,7 +119,7 @@ public class AddFriendFragment extends Fragment {
         return rootView;
     }
 
-    private class findFriend extends AsyncTask<Void, Void, Void> {
+    private class FindFriend extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             dialog.show();
@@ -164,14 +163,14 @@ public class AddFriendFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            response = Utility.getRequest("api/Users/" + phoneNo);
+            String response = Utility.getRequest("api/Users/" + phoneNo);
             user = Utility.customGson.fromJson(response, ApplicationUser.class);
 
             return null;
         }
     }
 
-    private class addFriend extends AsyncTask<Void, Void, Void> {
+    private class AddFriend extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

@@ -1,6 +1,7 @@
 package lcnch.cz3002.ntu.silverlink.fragment;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,8 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcnch.cz3002.ntu.silverlink.R;
+import lcnch.cz3002.ntu.silverlink.activity.GroupActivity;
+import lcnch.cz3002.ntu.silverlink.activity.GroupMessageActivity;
+import lcnch.cz3002.ntu.silverlink.activity.SettingActivity;
 import lcnch.cz3002.ntu.silverlink.adapter.MyGroupAdaptor;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
+import lcnch.cz3002.ntu.silverlink.model.FCMType;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
 import lcnch.cz3002.ntu.silverlink.model.Group;
 
@@ -56,7 +61,9 @@ public class MyGroupFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 group = groupList.get(position);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new MessageFragment(), "MessageFragment").commit();
+                MessageFragment.messageType = FCMType.GROUP_MESSAGE;
+                Intent intent = new Intent(getActivity(), GroupMessageActivity.class);
+                startActivity(intent);
             }
         });
 

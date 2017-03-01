@@ -5,8 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.STORAGE" />
 
@@ -56,7 +55,10 @@
         <!-- [END firebase_service] -->
 
         <activity android:name=".activity.CaregiverActivity" />
-        <activity android:name=".activity.GroupActivity" android:theme="@style/GroupTheme" />
+        <activity
+            android:name=".activity.GroupActivity"
+            android:theme="@style/GroupTheme" />
+        <activity android:name=".activity.GroupMessageActivity"></activity>
     </application>
 
 </manifest>

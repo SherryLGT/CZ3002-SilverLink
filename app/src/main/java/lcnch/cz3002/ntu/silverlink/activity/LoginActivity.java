@@ -12,8 +12,6 @@ import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.fragment.LoginFragment;
 
 /**
- *
- *
  * @author Sherry Lau Geok Teng
  * @version 1.0
  * @since 17/02/2017
@@ -26,14 +24,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, 0);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, 0);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
     }
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().findFragmentByTag("SignupFragment") == null) {
+        if (getSupportFragmentManager().findFragmentByTag("SignupFragment") == null) {
             AlertDialog dialog = new AlertDialog.Builder(this).setMessage("Are you sure you want to quit?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -43,8 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     }).setNegativeButton("No", null).show();
             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
             textView.setTextSize(30);
-        }
-        else {
+        } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new LoginFragment()).commit();
         }
     }

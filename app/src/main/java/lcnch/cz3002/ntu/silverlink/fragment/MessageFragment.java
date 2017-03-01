@@ -2,6 +2,10 @@ package lcnch.cz3002.ntu.silverlink.fragment;
 
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,9 +41,11 @@ import java.util.Random;
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.MessageAdapter;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
+import lcnch.cz3002.ntu.silverlink.model.FCMType;
 import lcnch.cz3002.ntu.silverlink.model.Message;
 
 import static lcnch.cz3002.ntu.silverlink.fragment.FriendFragment.friend;
+import static lcnch.cz3002.ntu.silverlink.fragment.MyGroupFragment.group;
 
 /**
  * @author Sherry Lau Geok Teng
@@ -49,6 +55,7 @@ import static lcnch.cz3002.ntu.silverlink.fragment.FriendFragment.friend;
 
 public class MessageFragment extends Fragment {
 
+    public static FCMType messageType;
     private View rootView;
     private ImageView ivProfilePic, ivPlay;
     private TextView tvName, tvPlay;
@@ -72,6 +79,21 @@ public class MessageFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public class MessageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getIntExtra("msgType",0) == FCMType.FRIEND_MESSAGE.getValue()){
+                if(intent.getIntExtra("itemId",0) == friend.getId()) {
+                    new GetMessages().execute();
+                }
+            }
+           else if(intent.getIntExtra("msgType",0) == FCMType.GROUP_MESSAGE.getValue()){
+                if(intent.getIntExtra("itemId",0) == group.getId()) {
+                    new GetMessages().execute();
+                }
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,22 +106,37 @@ public class MessageFragment extends Fragment {
         lvMessages = (ListView) rootView.findViewById(R.id.lv_messages);
         ibRecord = (ImageButton) rootView.findViewById(R.id.ib_record);
 
+        getActivity().registerReceiver(new MessageReceiver(), new IntentFilter("messageUpdater"));
+
         if (!folder.exists()) {
             folder.mkdir();
         }
 
         audioFile = new File(folder.getAbsolutePath(), "recording.3gp");
 
-        if (friend.getUser().getProfilePicture() != null) {
-            bitmap = BitmapFactory.decodeByteArray(friend.getUser().getProfilePicture(), 0, friend.getUser().getProfilePicture().length);
-            ivProfilePic.setImageBitmap(bitmap);
-        } else {
-            if (new Random().nextBoolean())
-                ivProfilePic.setImageResource(R.drawable.default_guy);
-            else
-                ivProfilePic.setImageResource(R.drawable.default_girl);
+        if (messageType == FCMType.FRIEND_MESSAGE) {
+            if (friend.getUser().getProfilePicture() != null) {
+                bitmap = BitmapFactory.decodeByteArray(friend.getUser().getProfilePicture(), 0, friend.getUser().getProfilePicture().length);
+                ivProfilePic.setImageBitmap(bitmap);
+            } else {
+                if (new Random().nextBoolean())
+                    ivProfilePic.setImageResource(R.drawable.default_guy);
+                else
+                    ivProfilePic.setImageResource(R.drawable.default_girl);
+            }
+            tvName.setText(friend.getUser().getFullName());
+        } else if (messageType == FCMType.GROUP_MESSAGE) {
+            if (group.getImage() != null) {
+                bitmap = BitmapFactory.decodeByteArray(group.getImage(), 0, group.getImage().length);
+                ivProfilePic.setImageBitmap(bitmap);
+            } else {
+                if (new Random().nextBoolean())
+                    ivProfilePic.setImageResource(R.drawable.default_guy);
+                else
+                    ivProfilePic.setImageResource(R.drawable.default_girl);
+            }
+            tvName.setText(group.getName());
         }
-        tvName.setText(friend.getUser().getFullName());
 
         new GetMessages().execute();
 
@@ -150,6 +187,7 @@ public class MessageFragment extends Fragment {
         return rootView;
     }
 
+
     private class GetMessages extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -164,9 +202,16 @@ public class MessageFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            String response = Utility.getRequest("api/Friends/" + friend.getId() + "/Messages/1970-01-01");
-            messageList = Utility.customGson.fromJson(response, new TypeToken<List<Message>>() {
-            }.getType());
+            if (messageType == FCMType.FRIEND_MESSAGE) {
+                String response = Utility.getRequest("api/Friends/" + friend.getId() + "/Messages/1970-01-01");
+                messageList = Utility.customGson.fromJson(response, new TypeToken<List<Message>>() {
+                }.getType());
+            } else if (messageType == FCMType.GROUP_MESSAGE) {
+                String response = Utility.getRequest("api/Groups/" + group.getId() + "/Messages/1970-01-01");
+                messageList = Utility.customGson.fromJson(response, new TypeToken<List<Message>>() {
+                }.getType());
+            }
+
 
             return null;
         }
@@ -195,7 +240,7 @@ public class MessageFragment extends Fragment {
     }
 
     private void StartPlaying() {
-        if(mediaPlayer != null) {
+        if (mediaPlayer != null) {
             StopPlaying();
         }
 
@@ -262,8 +307,7 @@ public class MessageFragment extends Fragment {
             out.close();
             in.close();
             return out.toByteArray();
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             return new byte[0];
         }
     }
@@ -276,7 +320,7 @@ public class MessageFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-           new GetMessages().execute();
+            new GetMessages().execute();
         }
 
         @Override
@@ -284,7 +328,12 @@ public class MessageFragment extends Fragment {
             tempMessage = new Message();
             byte[] data = ToByteArray(audioFile.getAbsolutePath());
             tempMessage.setMessageData(data);
-            Utility.postRequest("api/Friends/"+friend.getId()+"/Messages", Utility.customGson.toJson(tempMessage));
+            if (messageType == FCMType.FRIEND_MESSAGE) {
+                Utility.postRequest("api/Friends/" + friend.getId() + "/Messages", Utility.customGson.toJson(tempMessage));
+            }
+            else if (messageType == FCMType.GROUP_MESSAGE) {
+                Utility.postRequest("api/Groups/" + group.getId() + "/Messages", Utility.customGson.toJson(tempMessage));
+            }
 
             return null;
         }

@@ -20,12 +20,11 @@ import java.util.List;
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.adapter.UserAdapter;
 import lcnch.cz3002.ntu.silverlink.controller.Utility;
+import lcnch.cz3002.ntu.silverlink.model.FCMType;
 import lcnch.cz3002.ntu.silverlink.model.Friend;
 import lcnch.cz3002.ntu.silverlink.model.UserItem;
 
 /**
- *
- *
  * @author Sherry Lau Geok Teng
  * @version 1.0
  * @since 27/02/2017
@@ -65,7 +64,7 @@ public class FriendFragment extends Fragment {
         spnSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0: // alphabetical
                         recent = false;
                         new GetFriends().execute();
@@ -87,6 +86,7 @@ public class FriendFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 friend = friendList.get(position);
+                MessageFragment.messageType = FCMType.FRIEND_MESSAGE;
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new MessageFragment(), "MessageFragment").commit();
             }
         });
@@ -116,8 +116,9 @@ public class FriendFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             response = Utility.getRequest("api/Friends?recent=" + recent); // true - recent messages, false - alphabetical
-            friendList = Utility.customGson.fromJson(response, new TypeToken<List<Friend>>() {}.getType());
-            for(Friend friend : friendList) {
+            friendList = Utility.customGson.fromJson(response, new TypeToken<List<Friend>>() {
+            }.getType());
+            for (Friend friend : friendList) {
                 userItems.add(new UserItem(friend.getUser().getProfilePicture(), friend.getUser().getFullName()));
             }
 

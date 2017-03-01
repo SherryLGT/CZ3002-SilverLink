@@ -24,7 +24,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import lcnch.cz3002.ntu.silverlink.R;
 import lcnch.cz3002.ntu.silverlink.activity.SplashActivity;
-import lcnch.cz3002.ntu.silverlink.model.MessageType;
+import lcnch.cz3002.ntu.silverlink.model.FCMType;
 
 
 public class FCMService extends FirebaseMessagingService {
@@ -40,11 +40,27 @@ public class FCMService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
-        if(Integer.parseInt(remoteMessage.getData().get("type")) == MessageType.LOCATION_REQUEST.getValue())
-        {
+        if (Integer.parseInt(remoteMessage.getData().get("type")) == FCMType.LOCATION_REQUEST.getValue()) {
         }
 
-        sendNotification(remoteMessage.getNotification());
+        FCMType type = FCMType.values()[Integer.parseInt(remoteMessage.getData().get("type"))];
+        switch (type) {
+            case LOCATION_REQUEST:
+                break;
+            case FRIEND_MESSAGE:
+                break;
+            case GROUP_MESSAGE:
+                break;
+            case FRIEND_ADDED:
+                sendNotification(remoteMessage.getNotification());
+                break;
+            default:
+                break;
+        }
+        Intent intent = new Intent("messageUpdater");
+        intent.putExtra("msgType", type.getValue());
+        intent.putExtra("itemId", Integer.parseInt(remoteMessage.getData().get("id")));
+        getApplication().sendBroadcast(intent);
     }
 
     /**

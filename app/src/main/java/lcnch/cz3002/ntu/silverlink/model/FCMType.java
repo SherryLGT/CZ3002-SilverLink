@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by calvin on 28/2/2017.
  */
 
-public enum MessageType {
+public enum FCMType {
     @SerializedName("0")
     LOCATION_REQUEST(0),
     @SerializedName("1")
@@ -20,7 +20,7 @@ public enum MessageType {
 
     private final int value;
 
-    MessageType(int value) {
+    FCMType(int value) {
         this.value = value;
     }
 

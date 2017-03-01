@@ -262,7 +262,7 @@ public class SettingActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(SettingActivity.this, "Caregiver added", Toast.LENGTH_LONG).show();
+            Toast.makeText(SettingActivity.this, "Caregiver added", Toast.LENGTH_SHORT).show();
             new loadCarers().execute();
         }
 

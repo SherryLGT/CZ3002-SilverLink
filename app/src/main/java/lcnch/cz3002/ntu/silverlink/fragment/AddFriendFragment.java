@@ -178,7 +178,7 @@ public class AddFriendFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(getContext(), "Friend added", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Friend added", Toast.LENGTH_SHORT).show();
         }
 
         @Override

@@ -152,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
-            Toast.makeText(ProfileActivity.this, "Profile Updated!", Toast.LENGTH_LONG).show();
+            Toast.makeText(ProfileActivity.this, "Profile Updated!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -172,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
-            Toast.makeText(ProfileActivity.this, "Password Updated!", Toast.LENGTH_LONG).show();
+            Toast.makeText(ProfileActivity.this, "Password Updated!", Toast.LENGTH_SHORT).show();
         }
 
         @Override

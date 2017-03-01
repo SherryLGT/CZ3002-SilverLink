@@ -19,7 +19,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJW2OEMWvfdX8BdimTs8e9sQbqzmARc34" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo_empty" />
@@ -56,7 +55,8 @@
         </service>
         <!-- [END firebase_service] -->
 
-        <activity android:name=".activity.CaregiverActivity"></activity>
+        <activity android:name=".activity.CaregiverActivity" />
+        <activity android:name=".activity.GroupActivity" android:theme="@style/GroupTheme" />
     </application>
 
 </manifest>

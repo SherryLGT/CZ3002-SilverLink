@@ -45,7 +45,8 @@ public class HomeActivity extends AppCompatActivity {
         ibGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), GroupActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -66,8 +67,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // For testing purpose (remove when not needed)
-//        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), GroupActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -15,13 +15,13 @@ public class Group {
     private int id;
     private String name;
     private String description;
-    private Byte[] image;
+    private byte[] image;
     private ArrayList<ApplicationUser.SilverUser> members;
     private ArrayList<Message> messages;
 
     public Group() {}
 
-    public Group(int id, String name, String description, Byte[] image, ArrayList<ApplicationUser.SilverUser> members, ArrayList<Message> messages) {
+    public Group(int id, String name, String description, byte[] image, ArrayList<ApplicationUser.SilverUser> members, ArrayList<Message> messages) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,11 +54,11 @@ public class Group {
         this.description = description;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

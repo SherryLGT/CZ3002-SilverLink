@@ -51,4 +51,8 @@
     <string name="iv_msg">Message</string>
     <string name="tv_play">Play</string>
     <string name="ib_record">Record</string>
+
+    <!-- GROUP -->
+    <string name="iv_group_pic">Group Picture</string>
+    <string name="iv_star">Star</string>
 </resources>
